@@ -140,7 +140,7 @@
                             <div class="flex justify-between items-start mb-5">
                                 <div>
                                     <h4 class="text-xl font-semibold text-neutral">葡萄</h4>
-                                    <p class="text-gray-500 text-sm mt-1">价格区间: 650~800 美元/个</p>
+                                    <!-- 隐藏价格区间 -->
                                 </div>
                                 <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
                                     当季产品
@@ -172,7 +172,7 @@
                             <div class="flex justify-between items-start mb-5">
                                 <div>
                                     <h4 class="text-xl font-semibold text-neutral">葡萄酒</h4>
-                                    <p class="text-gray-500 text-sm mt-1">价格区间: 1400~1600 美元/瓶</p>
+                                    <!-- 隐藏价格区间 -->
                                 </div>
                                 <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
                                     畅销产品
@@ -216,7 +216,7 @@
                             <div class="flex justify-between items-start mb-5">
                                 <div>
                                     <h4 class="text-xl font-semibold text-neutral">饥饿类</h4>
-                                    <p class="text-gray-500 text-sm mt-1">价格区间: 1800~2300 美元/个</p>
+                                    <!-- 隐藏价格区间 -->
                                 </div>
                                 <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
                                     人气推荐
@@ -248,7 +248,7 @@
                             <div class="flex justify-between items-start mb-5">
                                 <div>
                                     <h4 class="text-xl font-semibold text-neutral">饥渴类</h4>
-                                    <p class="text-gray-500 text-sm mt-1">价格区间: 1500~2000 美元/个</p>
+                                    <!-- 隐藏价格区间 -->
                                 </div>
                                 <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
                                     新品上市
@@ -442,42 +442,13 @@
             thirst: []      // 饥渴类
         };
         
-        // 价格区间配置（美元）
+        // 价格区间配置（美元）- 保留配置用于功能正常运行
         const priceRanges = {
             grape: { min: 650, max: 800 },
             wine: { min: 1400, max: 1600 },
             hunger: { min: 1800, max: 2300 },
             thirst: { min: 1500, max: 2000 }
         };
-        
-        // 从本地存储加载数据
-        function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('priceData');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                // 恢复价格历史数据
-                for (const type in priceHistory) {
-                    if (data.priceHistory[type]) {
-                        priceHistory[type] = data.priceHistory[type];
-                    }
-                }
-                // 恢复上次更新时间
-                if (data.lastUpdate) {
-                    document.getElementById('last-update').textContent = data.lastUpdate;
-                }
-                return true;
-            }
-            return false;
-        }
-        
-        // 保存数据到本地存储
-        function saveToLocalStorage() {
-            const data = {
-                priceHistory: priceHistory,
-                lastUpdate: document.getElementById('last-update').textContent
-            };
-            localStorage.setItem('priceData', JSON.stringify(data));
-        }
         
         // 更新北京时间显示
         function updateBeijingTime() {
@@ -520,16 +491,8 @@
         
         // 初始化所有产品的价格历史
         function initPriceHistory() {
-            // 先尝试从本地存储加载数据
-            const loaded = loadFromLocalStorage();
-            
-            // 如果没有本地数据，则生成新数据
-            if (!loaded) {
-                for (const type in priceHistory) {
-                    priceHistory[type] = generatePriceHistory(type);
-                }
-                // 保存初始数据到本地存储
-                saveToLocalStorage();
+            for (const type in priceHistory) {
+                priceHistory[type] = generatePriceHistory(type);
             }
         }
         
@@ -606,9 +569,6 @@
             
             // 更新上次更新时间
             document.getElementById('last-update').textContent = new Date().toLocaleString();
-            
-            // 保存更新后的数据到本地存储
-            saveToLocalStorage();
             
             // 显示更新通知
             showUpdateNotification();
