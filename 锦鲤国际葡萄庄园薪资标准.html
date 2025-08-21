@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九龙锦鲤国际 - 葡萄庄园工资信息</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5A2B',    // 葡萄酒棕色调
+                        secondary: '#D2B48C',  // 木质色调
+                        accent: '#CD5C5C',     // 酒红色强调色
+                        light: '#F9F5EB',      // 浅色背景
+                        dark: '#3E2723',       // 深色文字
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+            }
+            .section-divider {
+                position: relative;
+                height: 40px;
+                margin: 2rem 0;
+            }
+            .section-divider::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 10%;
+                width: 80%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #8B5A2B, transparent);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light min-h-screen font-sans text-dark">
+    <!-- 顶部横幅 -->
+    <header class="relative bg-primary text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://picsum.photos/id/1080/1920/600" alt="葡萄园背景" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-[clamp(2.2rem,6vw,4rem)] font-bold mb-6 text-shadow tracking-wide">九龙锦鲤国际</h1>
+            <p class="text-[clamp(1.3rem,4vw,2rem)] font-medium text-shadow">葡萄庄园每周工资信息</p>
+            <div class="mt-8 inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+                <i class="fa fa-calendar-check-o mr-2"></i>
+                <span class="text-lg">最新薪资标准</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-14">
+        <!-- 职位薪资部分 -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] text-dark font-bold relative inline-block">
+                    <span class="relative z-10">职位薪资表</span>
+                    <span class="absolute bottom-1 left-0 w-full h-3 bg-secondary/30 -z-10"></span>
+                </h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">各职位每周薪资、在职要求及基础数值详细信息</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- CR职位卡片 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border-t-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <h3 class="text-xl font-bold text-primary">CR（接待员）</h3>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">入门级</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-money mr-2 text-accent"></i>每周工资：</span>
+                                <span class="font-bold text-lg text-accent">88w</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-calendar mr-2 text-primary"></i>在职要求：</span>
+                                <span class="font-medium">7天</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-bar-chart mr-2 text-primary"></i>低保：</span>
+                                <span class="font-medium">300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TL职位卡片 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border-t-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <h3 class="text-xl font-bold text-primary">TL（小组长）</h3>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">低保：</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-money mr-2 text-accent"></i>每周工资：</span>
+                                <span class="font-bold text-lg text-accent">120w</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-calendar mr-2 text-primary"></i>在职要求：</span>
+                                <span class="font-medium">15天</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-bar-chart mr-2 text-primary"></i>低保：</span>
+                                <span class="font-medium">648</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COO职位卡片 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border-t-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <h3 class="text-xl font-bold text-primary">COO（营运长）</h3>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">中高层</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-money mr-2 text-accent"></i>每周工资：</span>
+                                <span class="font-bold text-lg text-accent">150w</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-calendar mr-2 text-primary"></i>在职要求：</span>
+                                <span class="font-medium">31天</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-bar-chart mr-2 text-primary"></i>低保：</span>
+                                <span class="font-medium">980</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CFO职位卡片 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border-t-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <h3 class="text-xl font-bold text-primary">CFO（财务长）</h3>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">高管层</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-money mr-2 text-accent"></i>每周工资：</span>
+                                <span class="font-bold text-lg text-accent">210w</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-calendar mr-2 text-primary"></i>在职要求：</span>
+                                <span class="font-medium">47天</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-bar-chart mr-2 text-primary"></i>低保：</span>
+                                <span class="font-medium">1280</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTO职位卡片 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border-t-4 border-accent md:col-span-2 lg:col-span-1">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <h3 class="text-xl font-bold text-accent">CTO（技术长）</h3>
+                            <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">最高管理层</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-money mr-2 text-accent"></i>每周工资：</span>
+                                <span class="font-bold text-lg text-accent">280w</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-calendar mr-2 text-primary"></i>在职要求：</span>
+                                <span class="font-medium">61天</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><i class="fa fa-bar-chart mr-2 text-primary"></i>低保：</span>
+                                <span class="font-medium">1980</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 福利和提成部分 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- 福利部分 -->
+            <section class="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4">
+                        <i class="fa fa-gift text-2xl text-primary"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">员工福利</h2>
+                </div>
+                
+                <ul class="space-y-5 pl-16">
+                    <li class="relative">
+                        <div class="absolute left-[-40px] top-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-bold">1</span>
+                        </div>
+                        <div class="p-3 bg-light rounded-lg">
+                            <p class="font-medium">在线满1小时</p>
+                            <p class="text-gray-600 mt-1">提供15套员工餐</p>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <div class="absolute left-[-40px] top-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-bold">2</span>
+                        </div>
+                        <div class="p-3 bg-light rounded-lg">
+                            <p class="font-medium">在线满2小时</p>
+                            <p class="text-gray-600 mt-1">提供20套员工餐</p>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <div class="absolute left-[-40px] top-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-bold">3</span>
+                        </div>
+                        <div class="p-3 bg-light rounded-lg">
+                            <p class="font-medium">在线满3小时</p>
+                            <p class="text-gray-600 mt-1">提供35套员工餐</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 提成部分 -->
+            <section class="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mr-4">
+                        <i class="fa fa-percent text-2xl text-accent"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">提成制度</h2>
+                </div>
+                
+                <div class="bg-light rounded-xl p-5 mb-6 border-l-4 border-accent">
+                    <div class="flex items-start">
+                        <i class="fa fa-grape text-accent mt-1 mr-3 text-xl"></i>
+                        <p class="font-medium">当天收取超过6000个葡萄，提成当前职位每周工资的10%（每周封顶120w）</p>
+                    </div>
+                </div>
+                
+                <h3 class="font-bold text-lg mb-4 text-primary">提成计算示例</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <span>CR职位</span>
+                        <span class="font-medium">88w × 10% = <span class="text-accent">8.8w/天</span></span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <span>TL职位</span>
+                        <span class="font-medium">120w × 10% = <span class="text-accent">12w/天</span></span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <span>COO职位</span>
+                        <span class="font-medium">150w × 10% = <span class="text-accent">15w/天</span></span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <span>CFO职位</span>
+                        <span class="font-medium">210w × 10% = <span class="text-accent">21w/天</span></span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <span>CTO职位</span>
+                        <span class="font-medium">280w × 10% = <span class="text-accent">28w/天</span></span>
+                    </div>
+                </div>
+                
+                <div class="mt-5 pt-4 border-t border-gray-200 text-sm text-gray-500">
+                    <i class="fa fa-info-circle mr-1"></i>
+                    注：所有职位每周提成最高不超过120w
+                </div>
+            </section>
+        </div>
+
+        <!-- 总结信息卡 -->
+        <section class="bg-primary/5 rounded-xl p-6 border border-primary/20">
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-primary mb-3">薪资与福利说明</h3>
+                <p class="max-w-3xl mx-auto text-gray-700">
+                    以上薪资标准适用于九龙锦鲤国际葡萄庄园全体员工，根据职位等级和在职要求制定。
+                    员工可通过提高在线时长获取更多福利餐，并通过超额完成葡萄收取任务获得额外提成。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">九龙锦鲤国际</h3>
+                    <p class="text-white/70">葡萄庄园管理中心</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        <i class="fa fa-question-circle"></i> 帮助中心
+                    </a>
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        <i class="fa fa-envelope"></i> 联系我们：520-329-4330
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/10 text-center text-white/50 text-sm">
+                © 2025 九龙锦鲤国际葡萄庄园 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 添加页面滚动动画
+        document.addEventListener('DOMContentLoaded', () => {
+            // 职位卡片动画
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.card-hover, section > div');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight * 0.9) {
+                        element.classList.add('opacity-100', 'translate-y-0');
+                        element.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            };
+            
+            // 初始化元素样式
+            document.querySelectorAll('.card-hover, section > div').forEach(el => {
+                el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            });
+            
+            // 初始检查
+            animateOnScroll();
+            
+            // 滚动时检查
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
