@@ -45,6 +45,9 @@
             .price-value {
                 @apply text-[clamp(1.5rem,3vw,2rem)] font-bold text-primary my-2;
             }
+            .join-us-btn {
+                @apply bg-secondary hover:bg-secondary/90 text-neutral-dark font-semibold px-6 py-3 rounded-lg transition-all flex items-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-300;
+            }
         }
     </style>
 </head>
@@ -60,8 +63,8 @@
                 <p class="text-neutral-dark/70 italic ml-[42px]">——Koi International, Kowloon City</p>
             </div>
             
-            <div class="flex items-center">
-                <div class="bg-neutral rounded-lg px-4 py-2 flex items-center mr-4">
+            <div class="flex items-center flex-wrap justify-center gap-4">
+                <div class="bg-neutral rounded-lg px-4 py-2 flex items-center">
                     <i class="fa fa-clock-o text-primary mr-2"></i>
                     <span id="beijing-time" class="font-medium">2025/08/21 17:30:10</span>
                     <span class="ml-2 text-sm text-gray-500">(UTC+8)</span>
@@ -71,6 +74,11 @@
                     <i class="fa fa-refresh mr-2"></i>
                     <span>刷新价格</span>
                 </button>
+                
+                <a href="https://liyu3816.github.io/FiveM-Kowloon-City-koi-restaurant-/锦鲤国际葡萄庄园薪资标准" target="_blank" class="join-us-btn">
+                    <i class="fa fa-user-plus mr-2"></i>
+                    <span>加入我们</span>
+                </a>
             </div>
         </div>
         
@@ -220,7 +228,7 @@
             wine: { min: 1400, max: 1600, unit: '瓶' },
             hunger: { min: 1800, max: 2300, unit: '个' },
             thirst: { min: 1500, max: 2000, unit: '瓶' },
-            package: { min: 4000, max: 5000, unit: '套' } // 新增套餐价格范围
+            package: { min: 4000, max: 5000, unit: '套' } // 套餐价格范围
         };
         
         // 12小时（毫秒）
