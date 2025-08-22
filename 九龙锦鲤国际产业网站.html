@@ -1,7 +1,7 @@
 <html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>锦鲤国际 - 价格浮动平台</title>
+    <title>锦鲤国际商品价格浮动平台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
@@ -92,7 +92,7 @@
         <section class="mb-12">
             <h2 class="section-title flex items-center">
                 <i class="fa fa-leaf text-primary mr-3"></i>
-                葡萄园产业
+                锦鲤国际葡萄庄园
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="product-title">葡萄回收价格</h3>
-                        <p class="text-gray-600 mb-4">收购优质葡萄园种植的新鲜葡萄，口感醇厚，果香浓郁。</p>
+                        <p class="text-gray-600 mb-4">收购优质葡萄园种植的新鲜葡萄，口感醇厚，果香浓郁</p>
                         <div class="price-value" id="grape-price">$0</div>
                         <p class="price-update">上次更新: <span id="grape-last-update">-</span></p>
                     </div>
@@ -128,7 +128,7 @@
         <section>
             <h2 class="section-title flex items-center">
                 <i class="fa fa-cutlery text-primary mr-3"></i>
-                餐饮产业（未取得营业许可 暂未对外销售）
+                锦鲤国际大酒店
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="product-title">今日主餐价格</h3>
-                        <p class="text-gray-600 mb-4">精美正餐系列，选用新鲜食材，匠心烹饪。</p>
+                        <p class="text-gray-600 mb-4">精美正餐系列，选用新鲜食材，匠心烹饪</p>
                         <div class="price-value" id="hunger-price">$0</div>
                         <p class="price-update">上次更新: <span id="hunger-last-update">-</span></p>
                     </div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="product-title">今日饮品价格</h3>
-                        <p class="text-gray-600 mb-4">特色饮品系列，口感独特，清爽解渴，多种口味可供选择。</p>
+                        <p class="text-gray-600 mb-4">特色饮品系列，口感独特，清爽解渴，多种口味可供选择</p>
                         <div class="price-value" id="thirst-price">$1895 / 瓶</div>
                         <p class="price-update">上次更新: <span id="thirst-last-update">-</span></p>
                     </div>
@@ -182,7 +182,7 @@
                         <i class="fa fa-fish text-secondary text-2xl mr-2"></i>
                         <h2 class="text-xl font-bold">锦鲤国际九龙城分部</h2>
                     </div>
-                    <p class="mt-2 text-gray-400">全球领先的高端产品供应商</p>
+                    <p class="mt-2 text-gray-400">全球领先的高端商品收购商</p>
                     <!-- 联系信息 -->
                     <div class="mt-3 space-y-1 text-gray-400 text-sm">
                         <p class="flex items-center">
@@ -191,11 +191,11 @@
                         </p>
                         <p class="flex items-center">
                             <i class="fa fa-envelope w-5 mr-2 text-secondary"></i>
-                            邮箱: 待定
+                            生产许可: 正在办理
                         </p>
                         <p class="flex items-center">
                             <i class="fa fa-map-marker w-5 mr-2 text-secondary"></i>
-                            地址: 锦鲤国际葡萄庄园
+                            地址: 锦鲤国际大酒店（九龙城海滩洛波塔：695号）
                         </p>
                     </div>
                 </div>
@@ -226,9 +226,9 @@
         const PRICE_RANGES = {
             grape: { min: 650, max: 800, unit: '个' },
             wine: { min: 1400, max: 1600, unit: '瓶' },
-            hunger: { min: 1800, max: 2300, unit: '个' },
-            thirst: { min: 1500, max: 2000, unit: '瓶' },
-            package: { min: 4000, max: 5000, unit: '套' } // 套餐价格范围
+            hunger: { min: 5000, max: 6000, unit: '个' },
+            thirst: { min: 5000, max: 6000, unit: '瓶' },
+            package: { min: 9999, max: 10000, unit: '套' } // 套餐价格范围
         };
         
         // 12小时（毫秒）
