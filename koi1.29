@@ -1,0 +1,392 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锦鲤国际 - 价格浮动平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E63946', // 锦鲤红色
+                        secondary: '#FFB703', // 金色
+                        accent: '#023047', // 深蓝色
+                        neutral: '#F1FAEE', // 浅灰色
+                        'neutral-dark': '#1D3557', // 深灰色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .price-card {
+                @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+            }
+            .price-update {
+                @apply text-sm text-gray-500 italic;
+            }
+            .section-title {
+                @apply text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-dark mb-6 border-b-2 border-primary pb-2;
+            }
+            .product-title {
+                @apply text-xl font-semibold text-neutral-dark;
+            }
+            .price-value {
+                @apply text-[clamp(1.5rem,3vw,2rem)] font-bold text-primary my-2;
+            }
+            .join-us-btn {
+                @apply bg-secondary hover:bg-secondary/90 text-neutral-dark font-semibold px-6 py-3 rounded-lg transition-all flex items-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0 flex-col items-start">
+                <div class="flex items-center">
+                    <i class="fa fa-fish text-primary text-3xl mr-3"></i>
+                    <h1 class="text-[clamp(1.2rem,3vw,1.8rem)] font-bold text-neutral-dark">锦鲤国际</h1>
+                </div>
+                <p class="text-neutral-dark/70 italic ml-[42px]">——Koi International, Kowloon City</p>
+            </div>
+            
+            <div class="flex items-center flex-wrap justify-center gap-4">
+                <div class="bg-neutral rounded-lg px-4 py-2 flex items-center">
+                    <i class="fa fa-clock-o text-primary mr-2"></i>
+                    <span id="beijing-time" class="font-medium">2025/08/21 17:30:10</span>
+                    <span class="ml-2 text-sm text-gray-500">(UTC+8)</span>
+                </div>
+                
+                <button id="refresh-btn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all flex items-center">
+                    <i class="fa fa-refresh mr-2"></i>
+                    <span>刷新价格</span>
+                </button>
+                
+                <a href="https://liyu3816.github.io/FiveM-Kowloon-City-koi-restaurant-/锦鲤国际葡萄庄园薪资标准" target="_blank" class="join-us-btn">
+                    <i class="fa fa-user-plus mr-2"></i>
+                    <span>加入我们</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="bg-accent text-white px-4 py-2 text-center text-sm">
+            <p>价格每12小时自动更新一次 | 下次更新时间: <span id="next-update" class="font-medium"></span></p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 葡萄园产业 -->
+        <section class="mb-12">
+            <h2 class="section-title flex items-center">
+                <i class="fa fa-leaf text-primary mr-3"></i>
+                葡萄园产业
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 葡萄 -->
+                <div class="price-card">
+                    <div class="h-48 bg-gradient-to-r from-green-400 to-green-600 relative overflow-hidden">
+                        <img src="https://picsum.photos/id/102/800/400" alt="新鲜葡萄" class="w-full h-full object-cover mix-blend-overlay opacity-80">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="product-title">葡萄回收价格</h3>
+                        <p class="text-gray-600 mb-4">收购优质葡萄园种植的新鲜葡萄，口感醇厚，果香浓郁。</p>
+                        <div class="price-value" id="grape-price">$0</div>
+                        <p class="price-update">上次更新: <span id="grape-last-update">-</span></p>
+                    </div>
+                </div>
+                
+                <!-- 葡萄酒 -->
+                <div class="price-card">
+                    <div class="h-48 bg-gradient-to-r from-purple-400 to-purple-600 relative overflow-hidden">
+                        <img src="https://picsum.photos/id/225/800/400" alt="优质葡萄酒" class="w-full h-full object-cover mix-blend-overlay opacity-80">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="product-title">葡萄酒回收价格</h3>
+                        <p class="text-gray-600 mb-4">高价收购年久葡萄酒</p>
+                        <div class="price-value" id="wine-price">$0</div>
+                        <p class="price-update">上次更新: <span id="wine-last-update">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 餐饮产业 -->
+        <section>
+            <h2 class="section-title flex items-center">
+                <i class="fa fa-cutlery text-primary mr-3"></i>
+                餐饮产业（未取得营业许可 暂未对外销售）
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 饥饿类 -->
+                <div class="price-card">
+                    <div class="h-48 bg-gradient-to-r from-orange-400 to-orange-600 relative overflow-hidden">
+                        <img src="https://picsum.photos/id/292/800/400" alt="饥饿类餐饮" class="w-full h-full object-cover mix-blend-overlay opacity-80">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="product-title">今日主餐价格</h3>
+                        <p class="text-gray-600 mb-4">精美正餐系列，选用新鲜食材，匠心烹饪。</p>
+                        <div class="price-value" id="hunger-price">$0</div>
+                        <p class="price-update">上次更新: <span id="hunger-last-update">-</span></p>
+                    </div>
+                </div>
+                
+                <!-- 饥渴类 -->
+                <div class="price-card">
+                    <div class="h-48 bg-gradient-to-r from-blue-400 to-blue-600 relative overflow-hidden">
+                        <img src="https://picsum.photos/id/431/800/400" alt="饥渴类餐饮" class="w-full h-full object-cover mix-blend-overlay opacity-80">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="product-title">今日饮品价格</h3>
+                        <p class="text-gray-600 mb-4">特色饮品系列，口感独特，清爽解渴，多种口味可供选择。</p>
+                        <div class="price-value" id="thirst-price">$1895 / 瓶</div>
+                        <p class="price-update">上次更新: <span id="thirst-last-update">-</span></p>
+                    </div>
+                </div>
+                
+                <!-- 套餐价格 -->
+                <div class="price-card">
+                    <div class="h-48 bg-gradient-to-r from-red-400 to-red-600 relative overflow-hidden">
+                        <img src="https://picsum.photos/id/488/800/400" alt="餐饮套餐" class="w-full h-full object-cover mix-blend-overlay opacity-80">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="product-title">今日套餐价格</h3>
+                        <p class="text-gray-600 mb-4">精选组合套餐，包含主餐与饮品，性价比高。</p>
+                        <div class="price-value" id="package-price">$0</div>
+                        <p class="price-update">上次更新: <span id="package-last-update">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-neutral-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fa fa-fish text-secondary text-2xl mr-2"></i>
+                        <h2 class="text-xl font-bold">锦鲤国际九龙城分部</h2>
+                    </div>
+                    <p class="mt-2 text-gray-400">全球领先的高端产品供应商</p>
+                    <!-- 联系信息 -->
+                    <div class="mt-3 space-y-1 text-gray-400 text-sm">
+                        <p class="flex items-center">
+                            <i class="fa fa-phone w-5 mr-2 text-secondary"></i>
+                            联系电话: 520-329-4330
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fa fa-envelope w-5 mr-2 text-secondary"></i>
+                            邮箱: 待定
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fa fa-map-marker w-5 mr-2 text-secondary"></i>
+                            地址: 锦鲤国际葡萄庄园
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-facebook-square text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-twitter-square text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-linkedin-square text-2xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">© 2025 锦鲤国际九龙城分部. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 价格范围配置
+        const PRICE_RANGES = {
+            grape: { min: 650, max: 800, unit: '个' },
+            wine: { min: 1400, max: 1600, unit: '瓶' },
+            hunger: { min: 1800, max: 2300, unit: '个' },
+            thirst: { min: 1500, max: 2000, unit: '瓶' },
+            package: { min: 4000, max: 5000, unit: '套' } // 套餐价格范围
+        };
+        
+        // 12小时（毫秒）
+        const UPDATE_INTERVAL = 12 * 60 * 60 * 1000;
+        
+        // 生成基于时间种子的随机数，确保同一时间段内所有设备生成相同价格
+        function seededRandom(seed) {
+            // 简单的线性同余生成器
+            const a = 9301;
+            const c = 49297;
+            const m = 233280;
+            return (a * seed + c) % m / m;
+        }
+        
+        // 根据范围和时间种子生成价格（取整）
+        function generatePrice(range, seed) {
+            const random = seededRandom(seed);
+            const price = range.min + random * (range.max - range.min);
+            return Math.round(price); // 取整，不再保留小数
+        }
+        
+        // 获取当前时间段的种子（每12小时一个种子）
+        function getCurrentSeed() {
+            // 使用东八区时间计算种子，确保全球设备种子一致
+            const now = new Date();
+            const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
+            const beijingTime = new Date(utcTime + 8 * 3600000); // 东八区=UTC+8
+            return Math.floor(beijingTime.getTime() / UPDATE_INTERVAL);
+        }
+        
+        // 格式化日期时间 - 确保东八区时间显示格式统一且带秒数
+        function formatDateTime(date) {
+            return date.toLocaleString('zh-CN', {
+                timeZone: 'Asia/Shanghai', // 明确指定上海时区（东八区）
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+        }
+        
+        // 获取东八区当前时间
+        function getBeijingTime() {
+            const now = new Date();
+            // 计算UTC时间加上8小时得到东八区时间
+            const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
+            return new Date(utcTime + 8 * 3600000); // 8小时 = 8*60*60*1000毫秒
+        }
+        
+        // 实时更新显示的东八区时间（每秒更新一次）
+        function updateBeijingTime() {
+            const beijingTime = getBeijingTime();
+            document.getElementById('beijing-time').textContent = formatDateTime(beijingTime);
+        }
+        
+        // 计算下次更新时间（基于东八区）
+        function calculateNextUpdateTime() {
+            const beijingTime = getBeijingTime();
+            const currentSeed = getCurrentSeed();
+            const nextSeedTime = new Date((currentSeed + 1) * UPDATE_INTERVAL);
+            
+            // 确保返回的是东八区时间
+            return new Date(nextSeedTime.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+        }
+        
+        // 更新价格显示
+        function updatePrices() {
+            const seed = getCurrentSeed();
+            const updateTime = new Date(seed * UPDATE_INTERVAL);
+            // 转换为东八区时间显示
+            const beijingUpdateTime = new Date(updateTime.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+            const formattedUpdateTime = formatDateTime(beijingUpdateTime);
+            
+            // 更新葡萄价格
+            const grapePrice = generatePrice(PRICE_RANGES.grape, seed + 1);
+            document.getElementById('grape-price').textContent = `$${grapePrice} / ${PRICE_RANGES.grape.unit}`;
+            document.getElementById('grape-last-update').textContent = formattedUpdateTime;
+            
+            // 更新葡萄酒价格
+            const winePrice = generatePrice(PRICE_RANGES.wine, seed + 2);
+            document.getElementById('wine-price').textContent = `$${winePrice} / ${PRICE_RANGES.wine.unit}`;
+            document.getElementById('wine-last-update').textContent = formattedUpdateTime;
+            
+            // 更新饥饿类价格
+            const hungerPrice = generatePrice(PRICE_RANGES.hunger, seed + 3);
+            document.getElementById('hunger-price').textContent = `$${hungerPrice} / ${PRICE_RANGES.hunger.unit}`;
+            document.getElementById('hunger-last-update').textContent = formattedUpdateTime;
+            
+            // 更新饥渴类价格
+            const thirstPrice = generatePrice(PRICE_RANGES.thirst, seed + 4);
+            document.getElementById('thirst-price').textContent = `$${thirstPrice} / ${PRICE_RANGES.thirst.unit}`;
+            document.getElementById('thirst-last-update').textContent = formattedUpdateTime;
+            
+            // 更新套餐价格（与其他餐饮产品使用连续的种子，确保同时更新）
+            const packagePrice = generatePrice(PRICE_RANGES.package, seed + 5);
+            document.getElementById('package-price').textContent = `$${packagePrice} / ${PRICE_RANGES.package.unit}`;
+            document.getElementById('package-last-update').textContent = formattedUpdateTime;
+            
+            // 更新下次更新时间
+            const nextUpdateTime = calculateNextUpdateTime();
+            document.getElementById('next-update').textContent = formatDateTime(nextUpdateTime);
+            
+            // 添加价格更新动画
+            document.querySelectorAll('.price-value').forEach(el => {
+                el.classList.add('scale-110', 'text-secondary');
+                setTimeout(() => {
+                    el.classList.remove('scale-110', 'text-secondary');
+                }, 500);
+            });
+        }
+        
+        // 初始化
+        function init() {
+            // 立即更新时间并设置每秒刷新
+            updateBeijingTime();
+            setInterval(updateBeijingTime, 1000); // 每秒更新一次时间
+            
+            // 更新价格
+            updatePrices();
+            
+            // 设置自动更新（每小时检查一次是否需要更新）
+            setInterval(() => {
+                const currentSeed = getCurrentSeed();
+                const storedSeed = localStorage.getItem('priceSeed');
+                
+                if (storedSeed !== currentSeed.toString()) {
+                    localStorage.setItem('priceSeed', currentSeed);
+                    updatePrices();
+                }
+            }, 60 * 60 * 1000);
+            
+            // 刷新按钮事件
+            document.getElementById('refresh-btn').addEventListener('click', () => {
+                updatePrices();
+            });
+            
+            // 存储当前种子
+            localStorage.setItem('priceSeed', getCurrentSeed());
+            
+            // 滚动时导航栏效果
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 10) {
+                    header.classList.add('py-2');
+                    header.classList.remove('py-4');
+                } else {
+                    header.classList.add('py-4');
+                    header.classList.remove('py-2');
+                }
+            });
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+    
+    
+    </body></html>
